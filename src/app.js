@@ -15,7 +15,7 @@ export default class App extends Component {
   };
 
   drawPoint = (x, y, color) => {
-    const ctx = this.refs.canvas.getContext("2d", { alpha: false });
+    const ctx = this.refs.canvas.getContext("2d");
     ctx.fillStyle = color;
     ctx.fillRect(x, y, 1, 1);
   };
@@ -46,14 +46,8 @@ export default class App extends Component {
         //throw x and y in function that determines if x and y are in mandelbrot
         if (this.inMandelbrot(i, j) === 1000) {
           this.drawPoint(i, j, "black");
-        } else if (this.inMandelbrot(i, j) === 1) {
-          this.drawPoint(i, j, "red");
-        } else if (this.inMandelbrot(i, j) === 2) {
-          this.drawPoint(i, j, "blue");
-        } else if (this.inMandelbrot(i, j) === 3) {
-          this.drawPoint(i, j, "green");
-        } else if (this.inMandelbrot(i, j) === 4) {
-          this.drawPoint(i, j, "yellow");
+        } else {
+          this.drawPoint(i, j, `hsl(270,100%, ${this.inMandelbrot(i, j)}%`);
         }
       }
     }
