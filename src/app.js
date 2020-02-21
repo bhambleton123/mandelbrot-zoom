@@ -10,8 +10,12 @@ export default class App extends Component {
     this.mandelbrot();
   }
 
+  createColorPalette = () => {
+    let colors = [];
+  };
+
   drawPoint = (x, y, color) => {
-    const ctx = this.refs.canvas.getContext("2d");
+    const ctx = this.refs.canvas.getContext("2d", { alpha: false });
     ctx.fillStyle = color;
     ctx.fillRect(x, y, 1, 1);
   };
@@ -32,11 +36,7 @@ export default class App extends Component {
       iteration++;
     }
 
-    if (iteration < max) {
-      return false;
-    } else {
-      return true;
-    }
+    return iteration;
   };
 
   mandelbrot = () => {
@@ -44,8 +44,16 @@ export default class App extends Component {
       for (let j = 0; j < this.refs.canvas.width; j++) {
         //convert x and y to be out of 2
         //throw x and y in function that determines if x and y are in mandelbrot
-        if (this.inMandelbrot(i, j)) {
-          this.drawPoint(i, j);
+        if (this.inMandelbrot(i, j) === 1000) {
+          this.drawPoint(i, j, "black");
+        } else if (this.inMandelbrot(i, j) === 1) {
+          this.drawPoint(i, j, "red");
+        } else if (this.inMandelbrot(i, j) === 2) {
+          this.drawPoint(i, j, "blue");
+        } else if (this.inMandelbrot(i, j) === 3) {
+          this.drawPoint(i, j, "green");
+        } else if (this.inMandelbrot(i, j) === 4) {
+          this.drawPoint(i, j, "yellow");
         }
       }
     }
