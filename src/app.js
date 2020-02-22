@@ -116,7 +116,11 @@ export default class App extends Component {
         if (this.inMandelbrot(i, j) === 1000) {
           this.drawPoint(i, j, "black");
         } else {
-          this.drawPoint(i, j, `hsl(270,100%, ${this.inMandelbrot(i, j)}%`);
+          this.drawPoint(
+            i,
+            j,
+            `hsl(270,100%, ${0.3 * this.inMandelbrot(i, j)}%`
+          );
         }
       }
     }
